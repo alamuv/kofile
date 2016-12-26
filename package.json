@@ -1,0 +1,19 @@
+{
+  "name": "kofile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alamuv/kofile.git"
+  },
+  "author": "Alamelu Palaniappan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alamuv/kofile/issues"
+  },
+  "homepage": "https://github.com/alamuv/kofile#readme"
+}
