@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "./node_modules/.bin/eslint src",
     "test": "mocha test"
   },
   "repository": {
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/alamuv/kofile/issues"
   },
-  "homepage": "https://github.com/alamuv/kofile#readme"
+  "homepage": "https://github.com/alamuv/kofile#readme",
+  "devDependencies": {
+    "eslint": "^3.12.2"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }
