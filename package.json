@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint src",
+    "lint": "./node_modules/.bin/eslint .",
     "test": "mocha test"
   },
   "repository": {

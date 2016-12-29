@@ -11,8 +11,9 @@ const port = process.env.PORT || 8000;
 app.use('/api', routes);
 
 // start the server
+/* eslint-disable no-console */
 app.listen(port, () => {
   console.log('Kofile API listening on ' + port);
-})
+});
 
 module.exports = app;
