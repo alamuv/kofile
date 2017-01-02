@@ -77,7 +77,10 @@ Using curl,
 ]'`
 
 2) /orders/distribution
-- `curl -i -X POST -H  "Content-Type:application/json" http://localhost:8000/orders/distribution -d '[
+- `curl -i http://localhost:8000/orders/distribution
+  -X POST 
+  -H  "Content-Type:application/json" 
+  -d '[
   {
     "order_date": "1/11/2015",
     "order_number": "20150111000001",
