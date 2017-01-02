@@ -11,7 +11,6 @@ This repo includes basic unit tests which run on  mocha/chai/supertest.
 - Run `npm test`
 
 ## Testing API endpoints
-Using curl,
 
 1) /orders/prices
 - `curl -i http://localhost:8000/orders/prices 
@@ -75,6 +74,7 @@ Using curl,
     ]
   }
 ]'`
+- Using Postman, method POST to URL http://localhost:8000/orders/prices, with header Content-Type:application/json and body: contents of orders.json
 
 2) /orders/distribution
 - `curl -i http://localhost:8000/orders/distribution
