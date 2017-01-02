@@ -3,6 +3,7 @@ based on the fees in the fees.json file.*/
 'use strict';
 
 const fees = require('../../data/fees.json');
+const orders = require('../../data/orders.json');
 
 const orderPrices = (orders) => {
   let ordersDetails = [];
@@ -23,7 +24,6 @@ const orderPrices = (orders) => {
     }
     ordersDetails.push(orderDetails);
   });
-  printOrderDetails(ordersDetails);
   return ordersDetails;
 };
 
@@ -37,6 +37,7 @@ const itemPrice = (type, pages) => {
 
 /* eslint-disable no-console */
 const printOrderDetails = (ordersDetails) => {
+  console.log('Part 1\n#########################################');
   ordersDetails.forEach((order) => {
     console.log('\nOrder ID: ', order.order_number);
     order.order_items.forEach((item, index) => {
@@ -44,6 +45,9 @@ const printOrderDetails = (ordersDetails) => {
     });
     console.log(' Order total: $' + order.order_total);
   });
+  console.log('#########################################\n\n');
 };
+
+printOrderDetails(orderPrices(orders));
 
 module.exports = orderPrices;
