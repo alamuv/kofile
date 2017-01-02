@@ -2,7 +2,7 @@
 
 ## Getting started
 - Install Node.js 4.0 or newer
-- git clone https://github.com/alamuv/kofile.git
+- `git clone https://github.com/alamuv/kofile.git`
 - Run `npm install`
 - Run `npm start`
 
@@ -13,7 +13,7 @@ This repo includes basic unit tests which run on  mocha/chai/supertest.
 ## Testing API endpoints
 Using curl,
 1) /orders/prices
-- curl -i -X POST -H  "Content-Type:application/json" http://localhost:8000/orders/prices -d '[
+- `curl -i -X POST -H  "Content-Type:application/json" http://localhost:8000/orders/prices -d '[
   {
     "order_date": "1/11/2015",
     "order_number": "20150111000001",
@@ -70,6 +70,6 @@ Using curl,
       }
     ]
   }
-]'
+]'`
 
 
