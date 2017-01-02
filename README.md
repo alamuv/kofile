@@ -5,6 +5,7 @@
 - `git clone https://github.com/alamuv/kofile.git`
 - Run `npm install`
 - Run `npm start`
+Output of Part 1 and Part 2 will be logged in the terminal.
 
 ## Unit tests
 This repo includes basic unit tests which run on  mocha/chai/supertest.
