@@ -1,5 +1,6 @@
+'use strict';
 const ordersPrices = require('./orderPrices');
-// const ordersDistribution = require('/ordersDistribution');
+const ordersDistribution = require('./orderDistribution');
 
 const ordersPricesHandler = (req, res) => {
 
@@ -19,7 +20,7 @@ const ordersDistributionHandler = (req, res) => {
       message: 'Invalid Orders'
     });
   } else {
-    // res.status(200).json(ordersDistribution(req.body));
+    res.status(200).json(ordersDistribution(req.body));
   }
 };
 

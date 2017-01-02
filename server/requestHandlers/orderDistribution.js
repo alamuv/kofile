@@ -1,67 +1,75 @@
 /* orderDistribution outputs to the console the fund distributions for each order in the orders.json file, 
 and then output the totals in each fund after processing all orders. */
+'use strict';
 
-// import { orderPrices } from './orderPrices';
 const fees = require('../../data/fees.json');
 const orders = require('../../data/orders.json');
 
 const orderPrices = require('./orderPrices');
 
 const ordersDistribution = (orders) => {
-  const orderDetails = orderPrices(orders, fees);
-  const distribution = [];
+  const ordersPrices = orderPrices(orders);
+  const distributions = [];
 
-  orderDetails.forEach((order) => {
-    let orderDistribution = {};
-    orderDistribution.id = order.id;
+  ordersPrices.forEach((order) => {
+    let orderDetails = {};
+    orderDetails.order_number = order.order_number;
+    orderDetails.distribution = [];
 
-    order.items.forEach((item) => {
+    order.order_items.forEach((item) => {
       let feeType =  fees.find((fee) => fee.order_item_type === item.type);
       let fundTotal = 0;
       feeType.distributions.forEach((fund) => {
-        orderDistribution[fund.name] = orderDistribution[fund.name] || 0;
-        orderDistribution[fund.name] += parseInt(fund.amount);
+        getFundDist(orderDetails.distribution, fund);
         fundTotal += parseInt(fund.amount);
       });
       if (item.price > fundTotal) {
-        orderDistribution['Other'] = orderDistribution.Other || 0;
-        orderDistribution['Other'] += item.price - fundTotal;
+        getFundDist(orderDetails.distribution, { name: 'Other', amount: item.price - fundTotal});
       }
     });
-    distribution.push(orderDistribution);
+    distributions.push(orderDetails);
   });
-  return distribution;
+  return distributions;
 };
 
-const totalDistribution = (orderDistribution) => {
-  return orderDistribution.reduce((total, order) => {
-    for (let key in order) {
-      if (key !== 'id') {
-        total[key] = !total.hasOwnProperty(key) ? 0 : total[key];
-        total[key] += order[key];
-      }
-    }
+const getFundDist = (distribution, fund) => {
+
+  let fundDistribution = distribution.find((dist) => {
+    return dist.name === fund.name;
+  });
+  if (fundDistribution) {
+    fundDistribution.amount += parseInt(fund.amount);
+  } else {
+    fundDistribution = {};
+    fundDistribution.name = fund.name;
+    fundDistribution.amount = parseInt(fund.amount);
+    distribution.push(fundDistribution);
+  }
+};
+
+const totalDistribution = (orders) => {
+  return orders.reduce((total, order) => {
+    order.distribution.forEach((fund) => {
+      getFundDist(total, fund);
+    });
     return total;
-  }, {});
+  }, []);
 };
 
 /* eslint-disable no-console */
 const printDistribution = (orderDistribution) => {
   orderDistribution.forEach((order) => {
-    for (let key in order) {
-      if (key === 'id') {
-        console.log('\nOrder ID: ' + order.id);
-      } else {
-        console.log(' Fund - ' + key + ': $' + order[key]);
-      }
-    }
+    console.log('\nOrder ID: ' + order.order_number);
+    order.distribution.forEach((fund) => {
+      console.log(' Fund - ' + fund.name + ': $' + fund.amount);
+    })
   });
 
   console.log('\nTotal distributions:');
   const totalFunds = totalDistribution(orderDistribution);
-  for (let fund in totalFunds) {
-    console.log(' Fund - ' + fund + ': $' + totalFunds[fund]);
-  }
+  totalFunds.forEach((fund) => {
+    console.log(' Fund - ' + fund.name + ': $' + fund.amount);
+  })
 };
 
 printDistribution(ordersDistribution(orders));

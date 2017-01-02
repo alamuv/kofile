@@ -9,15 +9,15 @@ const orderPrices = (orders) => {
   let ordersDetails = [];
   orders.forEach((order) => {
     let orderDetails = {};
-    orderDetails.id = order.order_number;
-    orderDetails.items = [];
+    orderDetails.order_number = order.order_number;
+    orderDetails.order_items = [];
 
     const items = order.order_items;
-    orderDetails.total = items.reduce((prevTotal, item) => {
+    orderDetails.order_total = items.reduce((prevTotal, item) => {
       let itemDetails = {};
       itemDetails.type = item.type;
       itemDetails.price = itemPrice(item.type, item.pages);
-      orderDetails.items.push(itemDetails);
+      orderDetails.order_items.push(itemDetails);
       return prevTotal + itemDetails.price;
     }, 0);
     ordersDetails.push(orderDetails);
@@ -36,11 +36,11 @@ const itemPrice = (type, pages) => {
 /* eslint-disable no-console */
 const printOrderDetails = (ordersDetails) => {
   ordersDetails.forEach((order) => {
-    console.log('\nOrder ID: ', order.id);
-    order.items.forEach((item, index) => {
+    console.log('\nOrder ID: ', order.order_number);
+    order.order_items.forEach((item, index) => {
       console.log(' Order item ' + (index+1) + ': $' + item.price);
     });
-    console.log(' Order total: $' + order.total);
+    console.log(' Order total: $' + order.order_total);
   });
 };
 
