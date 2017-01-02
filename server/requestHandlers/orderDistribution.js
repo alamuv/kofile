@@ -3,7 +3,6 @@ and then output the totals in each fund after processing all orders. */
 'use strict';
 
 const fees = require('../../data/fees.json');
-const orders = require('../../data/orders.json');
 
 const orderPrices = require('./orderPrices');
 
@@ -29,6 +28,7 @@ const ordersDistribution = (orders) => {
     });
     distributions.push(orderDetails);
   });
+  printDistribution(distributions);
   return distributions;
 };
 
@@ -71,7 +71,5 @@ const printDistribution = (orderDistribution) => {
     console.log(' Fund - ' + fund.name + ': $' + fund.amount);
   })
 };
-
-printDistribution(ordersDistribution(orders));
 
 module.exports = ordersDistribution;

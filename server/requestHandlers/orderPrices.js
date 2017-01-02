@@ -3,7 +3,6 @@ based on the fees in the fees.json file.*/
 'use strict';
 
 const fees = require('../../data/fees.json');
-const orders = require('../../data/orders.json');
 
 const orderPrices = (orders) => {
   let ordersDetails = [];
@@ -13,15 +12,18 @@ const orderPrices = (orders) => {
     orderDetails.order_items = [];
 
     const items = order.order_items;
-    orderDetails.order_total = items.reduce((prevTotal, item) => {
-      let itemDetails = {};
-      itemDetails.type = item.type;
-      itemDetails.price = itemPrice(item.type, item.pages);
-      orderDetails.order_items.push(itemDetails);
-      return prevTotal + itemDetails.price;
-    }, 0);
+    if (Array.isArray(items)) {
+      orderDetails.order_total = items.reduce((prevTotal, item) => {
+        let itemDetails = {};
+        itemDetails.type = item.type;
+        itemDetails.price = itemPrice(item.type, item.pages);
+        orderDetails.order_items.push(itemDetails);
+        return prevTotal + itemDetails.price;
+      }, 0);
+    }
     ordersDetails.push(orderDetails);
   });
+  printOrderDetails(ordersDetails);
   return ordersDetails;
 };
 
@@ -43,7 +45,5 @@ const printOrderDetails = (ordersDetails) => {
     console.log(' Order total: $' + order.order_total);
   });
 };
-
-printOrderDetails(orderPrices(orders));
 
 module.exports = orderPrices;

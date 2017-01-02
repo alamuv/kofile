@@ -5,9 +5,9 @@ const ordersDistribution = require('./orderDistribution');
 const ordersPricesHandler = (req, res) => {
 
   // Bad Request - invalid orders JSON, respond with 400
-  if (req.body === undefined) {
+  if (req.body === undefined || !Array.isArray(req.body)) {
     res.status(400).json({
-      message: 'Invalid Orders'
+      message: 'Invalid Orders, expecting an array of orders'
     });
   } else {
     res.status(200).json(ordersPrices(req.body));
@@ -15,9 +15,9 @@ const ordersPricesHandler = (req, res) => {
 };
 
 const ordersDistributionHandler = (req, res) => {
-  if (req.body === undefined) {
+  if (req.body === undefined || !Array.isArray(req.body)) {
     res.status(400).json({
-      message: 'Invalid Orders'
+      message: 'Invalid Orders, expecting an array of orders'
     });
   } else {
     res.status(200).json(ordersDistribution(req.body));

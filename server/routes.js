@@ -5,8 +5,8 @@ router.get('/', (req, res) => {
   res.json({ message: 'Welcome to Kofile API' });
 });
 
-router.post('/ordersPrices', ordersHandler.ordersPricesHandler);
+router.post('/prices', ordersHandler.ordersPricesHandler);
 
-router.post('/ordersDistribution', ordersHandler.ordersDistributionHandler);
+router.post('/distribution', ordersHandler.ordersDistributionHandler);
 
 module.exports = router;

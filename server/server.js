@@ -1,3 +1,4 @@
+// import express from 'express';
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
@@ -8,7 +9,7 @@ app.use(bodyParser.json());
 const port = process.env.PORT || 8000;
 
 // prefix routes with api
-app.use('/api', routes);
+app.use('/orders', routes);
 
 // start the server
 /* eslint-disable no-console */
