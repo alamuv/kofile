@@ -14,7 +14,10 @@ This repo includes basic unit tests which run on  mocha/chai/supertest.
 Using curl,
 
 1) /orders/prices
-- `curl -i -X POST -H  "Content-Type:application/json" http://localhost:8000/orders/prices -d '[
+- `curl -i http://localhost:8000/orders/prices 
+  -X POST 
+  -H  "Content-Type:application/json" 
+  -d '[
   {
     "order_date": "1/11/2015",
     "order_number": "20150111000001",
