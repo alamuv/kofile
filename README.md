@@ -74,7 +74,7 @@ This repo includes basic unit tests which run on  mocha/chai/supertest.
     ]
   }
 ]'`
-- Using Postman, method POST to URL http://localhost:8000/orders/prices, with header Content-Type:application/json and body: contents of orders.json
+- Using Postman, method `POST` to URL `http://localhost:8000/orders/prices`, with header Content-Type:application/json and body: contents of orders.json
 
 2) /orders/distribution
 - `curl -i http://localhost:8000/orders/distribution
@@ -138,5 +138,7 @@ This repo includes basic unit tests which run on  mocha/chai/supertest.
     ]
   }
 ]'`
+- Using Postman, method `POST` to URL `http://localhost:8000/orders/distribution`, with header Content-Type:application/json and body: contents of orders.json
+
 
 
